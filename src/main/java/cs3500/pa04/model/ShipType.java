@@ -27,6 +27,12 @@ public enum ShipType {
     }
   }
 
+  /**
+   * Returns the type of ship from the given number.
+   *
+   * @param num the given number
+   * @return the type of ship from the given number
+   */
   public static ShipType getTypeFromNumber(int num) {
     switch (num) {
       case 0:

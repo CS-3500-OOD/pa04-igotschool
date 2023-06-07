@@ -3,14 +3,21 @@ package cs3500.pa04.controller;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import cs3500.pa04.model.FleetJson;
 import cs3500.pa04.model.JoinMessage;
 import cs3500.pa04.model.JsonUtils;
 import cs3500.pa04.model.MessageJson;
 import cs3500.pa04.model.Player;
+import cs3500.pa04.model.Ship;
+import cs3500.pa04.model.ShipAdapter;
+import cs3500.pa04.model.ShipType;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class ProxyController {
   Player player;
@@ -65,6 +72,9 @@ public class ProxyController {
         this.out.println(joinResponse);
         break;
       case "setup":
+        MessageJson setupResponse =
+            new MessageJson("setup", JsonUtils.serializeRecord(setup(arguments)));
+        this.out.println(setupResponse);
         break;
       case "take-shots":
         break;
@@ -77,5 +87,32 @@ public class ProxyController {
       default:
         throw new IllegalArgumentException("Invalid message name");
     }
+  }
+
+  /**
+   * Returns a FleetJson of the player's fleet after setup
+   *
+   * @param arguments the arguments for the setup request
+   * @return the FleetJson representing the players placements
+   */
+  private FleetJson setup(JsonNode arguments) {
+    int height = arguments.get("height").asInt();
+    int width = arguments.get("width").asInt();
+
+    int numCarrier = arguments.get("fleet-spec").get("CARRIER").asInt();
+    int numBattleship = arguments.get("fleet-spec").get("BATTLESHIP").asInt();
+    int numDestroyer = arguments.get("fleet-spec").get("DESTROYER").asInt();
+    int numSubmarine = arguments.get("fleet-spec").get("SUBMARINE").asInt();
+
+    HashMap<ShipType, Integer> specs = new HashMap<>();
+
+    specs.put(ShipType.CARRIER, numCarrier);
+    specs.put(ShipType.BATTLESHIP, numBattleship);
+    specs.put(ShipType.DESTROYER, numDestroyer);
+    specs.put(ShipType.SUBMARINE, numSubmarine);
+
+    List<Ship> placements = this.player.setup(height, width, specs);
+
+    return ShipAdapter.adaptList(placements);
   }
 }
