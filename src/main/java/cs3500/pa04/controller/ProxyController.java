@@ -59,6 +59,7 @@ public class ProxyController {
         delegateMessage(message);
       }
     } catch (IOException e) {
+      System.out.println("Error");
       // Disconnected from server or parsing exception
     }
   }
@@ -127,7 +128,7 @@ public class ProxyController {
    */
   private void succesfulHits(JsonNode arguments) {
     CoordinatesMessage coords =
-        new ObjectMapper().convertValue(arguments, CoordinatesMessage.class);
+        this.mapper.convertValue(arguments, CoordinatesMessage.class);
 
     // Array to ArrayList
     ArrayList<Coord> successfulHits = new ArrayList<>();
@@ -157,7 +158,7 @@ public class ProxyController {
    */
   private CoordinatesMessage reportDamage(JsonNode arguments) {
     CoordinatesMessage coords =
-        new ObjectMapper().convertValue(arguments, CoordinatesMessage.class);
+        this.mapper.convertValue(arguments, CoordinatesMessage.class);
 
     // Array to ArrayList
     ArrayList<Coord> shotsOnPlayer = new ArrayList<>();

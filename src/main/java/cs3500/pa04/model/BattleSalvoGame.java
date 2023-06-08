@@ -20,7 +20,7 @@ public class BattleSalvoGame {
    */
   public BattleSalvoGame(Readable in) {
     this.manualPlayer = new ManualPlayer("Player", in);
-    this.computerPlayer = new ComputerPlayer();
+    this.computerPlayer = new ComputerPlayer(System.out);
   }
 
   /**
