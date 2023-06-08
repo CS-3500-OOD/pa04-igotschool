@@ -1,5 +1,7 @@
-package cs3500.pa04.json;
+package cs3500.pa04.model;
 
+import cs3500.pa04.json.FleetJson;
+import cs3500.pa04.json.ShipJson;
 import cs3500.pa04.model.Ship;
 import java.util.List;
 

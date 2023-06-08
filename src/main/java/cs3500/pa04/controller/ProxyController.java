@@ -11,7 +11,7 @@ import cs3500.pa04.json.JsonUtils;
 import cs3500.pa04.json.MessageJson;
 import cs3500.pa04.model.Player;
 import cs3500.pa04.model.Ship;
-import cs3500.pa04.json.ShipAdapter;
+import cs3500.pa04.model.ShipAdapter;
 import cs3500.pa04.model.ShipType;
 import cs3500.pa04.json.CoordinatesMessage;
 import java.io.IOException;
@@ -51,7 +51,7 @@ public class ProxyController {
    * Runs the proxy server and listens for and sends JSON messages.
    */
   public void run() {
-    // TODO: Error here when trying to run the server
+    // TODO: Error here when trying to run the server, prolly due to println being incorrect
     try {
       JsonParser parser = this.mapper.getFactory().createParser(this.in);
 
