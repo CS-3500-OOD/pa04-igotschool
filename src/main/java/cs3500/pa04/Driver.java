@@ -25,7 +25,7 @@ public class Driver {
       game.playGame(System.out);
     } else if (args.length == 2) {
       try {
-        Player player = new ComputerPlayer(System.out);
+        ComputerPlayer player = new ComputerPlayer(System.out);
 
         String host = args[0];
         int port = Integer.parseInt(args[1]);

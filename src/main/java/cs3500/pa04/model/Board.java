@@ -313,4 +313,21 @@ public class Board {
   public int getNumCols() {
     return board[0].length;
   }
+
+  /**
+   * Returns a string representation of this board.
+   *
+   * @return a string representation of this board
+   */
+  @Override
+  public String toString() {
+    StringBuilder boardString = new StringBuilder();
+    for (Cell[] row : board) {
+      for (Cell cell : row) {
+        boardString.append(cell.toString());
+      }
+      boardString.append("\n");
+    }
+    return boardString.toString();
+  }
 }

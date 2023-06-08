@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class ShipAdapter {
   public static ShipJson adapt(Ship ship) {
+    // TODO: Broken bc Cells[0] is NOT always the top of the ship.
     return new ShipJson(ship.getCells()[0].getCoord(), ship.getLength(), ship.getDirection());
   }
 

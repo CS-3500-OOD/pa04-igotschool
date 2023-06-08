@@ -3,6 +3,7 @@ package cs3500.pa04.controller;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import cs3500.pa04.model.ComputerPlayer;
 import cs3500.pa04.model.Coord;
 import cs3500.pa04.json.FleetJson;
 import cs3500.pa04.model.GameResult;
@@ -26,7 +27,7 @@ import java.util.List;
  * Proxy class for a server that hosts a game of Battleship.
  */
 public class ProxyController {
-  Player player;
+  ComputerPlayer player;
 
   Socket server;
 
@@ -40,7 +41,7 @@ public class ProxyController {
    *
    * @param player the player connecting to this proxy server
    */
-  public ProxyController(Player player, Socket server) throws IOException {
+  public ProxyController(ComputerPlayer player, Socket server) throws IOException {
     this.player = player;
     this.server = server;
     this.in = server.getInputStream();
@@ -57,7 +58,6 @@ public class ProxyController {
       while (!this.server.isClosed()) {
         MessageJson message = parser.readValueAs(MessageJson.class);
         delegateMessage(message);
-        System.out.println("Message received: " + message);
       }
     } catch (IOException e) {
       // Disconnected from server or parsing exception
@@ -89,6 +89,7 @@ public class ProxyController {
         this.out.println(JsonUtils.serializeRecord(takeShotsResponse));
         break;
       case "report-damage":
+        System.out.println(player.getBoard().toString());
         MessageJson reportDamageResponse =
             new MessageJson("report-damage",
                 JsonUtils.serializeRecord(reportDamage(arguments)));
@@ -170,6 +171,7 @@ public class ProxyController {
     }
 
     List<Coord> damage = this.player.reportDamage(shotsOnPlayer);
+    System.out.println("NUMBER OF HITS: " + damage.size());
     Coord[] damageArray = damage.toArray(new Coord[0]);
 
     return new CoordinatesMessage(damageArray);
