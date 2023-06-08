@@ -3,6 +3,7 @@ package cs3500.pa04.controller;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import cs3500.pa04.model.Coord;
 import cs3500.pa04.model.FleetJson;
 import cs3500.pa04.model.JoinMessage;
 import cs3500.pa04.model.JsonUtils;
@@ -11,6 +12,7 @@ import cs3500.pa04.model.Player;
 import cs3500.pa04.model.Ship;
 import cs3500.pa04.model.ShipAdapter;
 import cs3500.pa04.model.ShipType;
+import cs3500.pa04.model.TakeShotsMessage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -77,6 +79,12 @@ public class ProxyController {
         this.out.println(setupResponse);
         break;
       case "take-shots":
+        List<Coord> shots = this.player.takeShots();
+        Coord[] shotsArray = shots.toArray(new Coord[0]);
+        TakeShotsMessage takeShotsMessage = new TakeShotsMessage(shotsArray);
+        MessageJson takeShotsResponse =
+            new MessageJson("take-shots", JsonUtils.serializeRecord(takeShotsMessage));
+        this.out.println(takeShotsResponse);
         break;
       case "report-damage":
         break;
