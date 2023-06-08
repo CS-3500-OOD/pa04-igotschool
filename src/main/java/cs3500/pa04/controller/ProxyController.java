@@ -12,7 +12,7 @@ import cs3500.pa04.model.Player;
 import cs3500.pa04.model.Ship;
 import cs3500.pa04.model.ShipAdapter;
 import cs3500.pa04.model.ShipType;
-import cs3500.pa04.model.TakeShotsMessage;
+import cs3500.pa04.model.CoordinatesMessage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -21,6 +21,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Proxy class for a server that hosts a game of Battleship.
+ */
 public class ProxyController {
   Player player;
 
@@ -79,14 +82,14 @@ public class ProxyController {
         this.out.println(setupResponse);
         break;
       case "take-shots":
-        List<Coord> shots = this.player.takeShots();
-        Coord[] shotsArray = shots.toArray(new Coord[0]);
-        TakeShotsMessage takeShotsMessage = new TakeShotsMessage(shotsArray);
         MessageJson takeShotsResponse =
-            new MessageJson("take-shots", JsonUtils.serializeRecord(takeShotsMessage));
+            new MessageJson("take-shots", JsonUtils.serializeRecord(takeShots()));
         this.out.println(takeShotsResponse);
         break;
       case "report-damage":
+        MessageJson reportDamageResponse =
+            new MessageJson("report-damage",
+                JsonUtils.serializeRecord(reportDamage(arguments)));
         break;
       case "successful-hits":
         break;
@@ -95,6 +98,37 @@ public class ProxyController {
       default:
         throw new IllegalArgumentException("Invalid message name");
     }
+  }
+
+  /**
+   * Returns a list of shots this player take
+   *
+   * @return the list of shots the player takes
+   */
+  private CoordinatesMessage takeShots() {
+    List<Coord> shots = this.player.takeShots();
+    Coord[] shotsArray = shots.toArray(new Coord[0]);
+    return new CoordinatesMessage(shotsArray);
+  }
+
+  /**
+   * Returns a list of successful hits on the player's ships from the given arguments
+   *
+   * @param arguments the arguments for the report damage request
+   * @return the list of successful hits on the player's ships
+   */
+  private CoordinatesMessage reportDamage(JsonNode arguments) {
+    CoordinatesMessage coords =
+        new ObjectMapper().convertValue(arguments, CoordinatesMessage.class);
+    ArrayList<Coord> shotsOnPlayer = new ArrayList<>();
+    for (Coord coord : coords.getCoordinates()) {
+      shotsOnPlayer.add(coord);
+    }
+
+    List<Coord> damage = this.player.reportDamage(shotsOnPlayer);
+    Coord[] damageArray = damage.toArray(new Coord[0]);
+
+    return new CoordinatesMessage(damageArray);
   }
 
   /**
