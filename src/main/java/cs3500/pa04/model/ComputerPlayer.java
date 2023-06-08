@@ -50,11 +50,11 @@ public class ComputerPlayer implements Player {
   public List<Coord> takeShots() {
     ArrayList<Coord> shots = new ArrayList<>();
     for (int i = 0; i < this.board.getShips().size(); i++) {
-      Coord c = new Coord((rand.nextInt(board.getNumRows())),
-          rand.nextInt(board.getNumCols()));
+      Coord c = new Coord(rand.nextInt(board.getNumCols()), (rand.nextInt(board.getNumRows()))
+      );
       while (this.shotsMade.contains(c)) {
-        c = new Coord((rand.nextInt(board.getNumRows())),
-            rand.nextInt(board.getNumCols()));
+        c = new Coord(rand.nextInt(board.getNumCols()), (rand.nextInt(board.getNumRows()))
+        );
       }
       shots.add(c);
       this.shotsMade.add(c);

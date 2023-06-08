@@ -78,7 +78,7 @@ public abstract class Ship {
    * Returns the direction of this ship.
    */
   public String getDirection() {
-    return this.cells[0].getCoord().getCol() == this.cells[1].getCoord().getCol() ? "VERTICAL"
+    return this.cells[0].getCoord().getX() == this.cells[1].getCoord().getX() ? "VERTICAL"
         : "HORIZONTAL";
   }
 

@@ -66,9 +66,9 @@ public class ManualPlayer implements Player {
     ArrayList<Coord> shots = InputParser.getListOfShots(this,
         this.in, this.out);
     for (Coord c : shots) {
-      if (c.getRow() >= this.opponentBoard.getNumRows() ||
-          c.getCol() >= this.opponentBoard.getNumCols() ||
-          c.getRow() < 0 || c.getCol() < 0) {
+      if (c.getY() >= this.opponentBoard.getNumRows() ||
+          c.getX() >= this.opponentBoard.getNumCols() ||
+          c.getY() < 0 || c.getX() < 0) {
         OutputParser.show("Invalid coordinate: " + c, out);
         return takeShots();
       }

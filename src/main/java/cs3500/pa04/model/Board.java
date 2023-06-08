@@ -52,7 +52,7 @@ public class Board {
    * @param coord the coordinate of the cell to return
    */
   public Cell getCell(Coord coord) {
-    return this.board[coord.getRow()][coord.getCol()];
+    return this.board[coord.getY()][coord.getX()];
   }
 
   /**
@@ -234,13 +234,13 @@ public class Board {
    */
   private ArrayList<Cell> getHorizontalConsecutive(Cell cell) {
     ArrayList<Cell> consecutive = new ArrayList<>();
-    int row = cell.getCoord().getRow();
-    int col = cell.getCoord().getCol() - 1;
+    int row = cell.getCoord().getY();
+    int col = cell.getCoord().getX() - 1;
     while (col >= 0 && board[row][col].getShip() instanceof Empty) {
       consecutive.add(board[row][col]);
       col--;
     }
-    col = cell.getCoord().getCol();
+    col = cell.getCoord().getX();
     while (col < board[0].length && board[row][col].getShip() instanceof Empty) {
       consecutive.add(board[row][col]);
       col++;
@@ -256,13 +256,13 @@ public class Board {
    */
   private ArrayList<Cell> getVerticalConsecutive(Cell cell) {
     ArrayList<Cell> consecutive = new ArrayList<>();
-    int row = cell.getCoord().getRow() - 1;
-    int col = cell.getCoord().getCol();
+    int row = cell.getCoord().getY() - 1;
+    int col = cell.getCoord().getX();
     while (row >= 0 && board[row][col].getShip() instanceof Empty) {
       consecutive.add(board[row][col]);
       row--;
     }
-    row = cell.getCoord().getRow();
+    row = cell.getCoord().getY();
     while (row < board.length && board[row][col].getShip() instanceof Empty) {
       consecutive.add(board[row][col]);
       row++;

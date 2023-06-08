@@ -13,7 +13,7 @@ public class Cell {
    * Constructs a cell with no ship.
    */
   public Cell(int row, int col) {
-    Coord coord1 = new Coord(row, col);
+    Coord coord1 = new Coord(col, row);
     this.coord = coord1;
     Cell[] c = new Cell[1];
     c[0] = this;

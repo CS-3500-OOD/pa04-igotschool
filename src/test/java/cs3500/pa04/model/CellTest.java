@@ -50,8 +50,8 @@ class CellTest {
    */
   @Test
   public void testGetCoord() {
-    assertEquals(0, cell.getCoord().getRow());
-    assertEquals(0, cell.getCoord().getCol());
+    assertEquals(0, cell.getCoord().getY());
+    assertEquals(0, cell.getCoord().getX());
   }
 
   /**

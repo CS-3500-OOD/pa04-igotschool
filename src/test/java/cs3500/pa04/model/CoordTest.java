@@ -13,8 +13,8 @@ class CoordTest {
    */
   @Test
   void testGetRow() {
-    Coord c = new Coord(1, 2);
-    assertEquals(1, c.getRow());
+    Coord c = new Coord(2, 1);
+    assertEquals(1, c.getY());
   }
 
   /**
@@ -22,8 +22,8 @@ class CoordTest {
    */
   @Test
   void testGetCol() {
-    Coord c = new Coord(1, 2);
-    assertEquals(2, c.getCol());
+    Coord c = new Coord(2, 1);
+    assertEquals(2, c.getX());
   }
 
   /**
@@ -31,9 +31,9 @@ class CoordTest {
    */
   @Test
   void testEquals() {
-    Coord c1 = new Coord(1, 2);
-    Coord c2 = new Coord(1, 2);
-    Coord c3 = new Coord(2, 1);
+    Coord c1 = new Coord(2, 1);
+    Coord c2 = new Coord(2, 1);
+    Coord c3 = new Coord(1, 2);
     assertTrue(c1.equals(c2));
     assertFalse(c1.equals(c3));
   }
@@ -43,7 +43,7 @@ class CoordTest {
    */
   @Test
   void testToString() {
-    Coord c = new Coord(1, 2);
+    Coord c = new Coord(2, 1);
     assertEquals("1 2", c.toString());
   }
 }

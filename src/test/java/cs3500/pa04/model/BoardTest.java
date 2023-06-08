@@ -51,11 +51,11 @@ class BoardTest {
     ArrayList<Coord> shots = new ArrayList<>();
     assertEquals(0, board.reportDamage(shots).size());
     shots.add(new Coord(0, 0));
-    shots.add(new Coord(0, 1));
-    shots.add(new Coord(0, 2));
-    shots.add(new Coord(0, 3));
-    shots.add(new Coord(0, 4));
-    shots.add(new Coord(0, 5));
+    shots.add(new Coord(1, 0));
+    shots.add(new Coord(2, 0));
+    shots.add(new Coord(3, 0));
+    shots.add(new Coord(4, 0));
+    shots.add(new Coord(5, 0));
     assertEquals(6, board.reportDamage(shots).size());
     assertEquals(3, board.getShips().size());
   }
@@ -69,7 +69,7 @@ class BoardTest {
     shots.add(new Coord(0, 0));
     board.successfulHits(shots);
     assertTrue(board.getCell(new Coord(0, 0)).isHit());
-    assertFalse(board.getCell(new Coord(0, 1)).isHit());
+    assertFalse(board.getCell(new Coord(1, 0)).isHit());
   }
 
   /**

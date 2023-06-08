@@ -68,8 +68,8 @@ class ManualPlayerTest {
     List<Coord> shots = player.takeShots();
     assertTrue(shots.get(0).equals(new Coord(1, 1)));
     assertTrue(shots.get(1).equals(new Coord(2, 2)));
-    assertTrue(shots.get(2).equals(new Coord(1, 3)));
-    assertTrue(shots.get(3).equals(new Coord(1, 4)));
+    assertTrue(shots.get(2).equals(new Coord(3, 1)));
+    assertTrue(shots.get(3).equals(new Coord(4, 1)));
   }
 
   /**
@@ -103,11 +103,11 @@ class ManualPlayerTest {
     ArrayList<Coord> shots = new ArrayList<>();
     assertEquals(0, player.reportDamage(shots).size());
     shots.add(new Coord(0, 0));
-    shots.add(new Coord(0, 1));
-    shots.add(new Coord(0, 2));
-    shots.add(new Coord(0, 3));
-    shots.add(new Coord(0, 4));
-    shots.add(new Coord(0, 5));
+    shots.add(new Coord(1, 0));
+    shots.add(new Coord(2, 0));
+    shots.add(new Coord(3, 0));
+    shots.add(new Coord(4, 0));
+    shots.add(new Coord(5, 0));
     shots.add(new Coord(5, 5));
     for (Coord shot : shots) {
       player.getBoard().getCell(shot).hit();
@@ -133,7 +133,7 @@ class ManualPlayerTest {
     shots.add(new Coord(0, 0));
     player.successfulHits(shots);
     assertTrue(player.getOpponentBoard().getCell(new Coord(0, 0)).isHit());
-    assertFalse(player.getBoard().getCell(new Coord(0, 1)).isHit());
+    assertFalse(player.getBoard().getCell(new Coord(1, 0)).isHit());
   }
 
   /**

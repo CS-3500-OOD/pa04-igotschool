@@ -2,19 +2,23 @@ package cs3500.pa04.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Represents a coordinate on a board
+ */
 public class Coord {
-  private int row;
-  private int col;
+  private int x;
+  private int y;
+
 
   /**
    * Constructs a coordinate with the given row and column.
    *
-   * @param row the row of this coordinate
    * @param col the column of this coordinate
+   * @param row the row of this coordinate
    */
-  public Coord(@JsonProperty("x") int row, @JsonProperty("y") int col) {
-    this.row = row;
-    this.col = col;
+  public Coord(@JsonProperty("x") int col, @JsonProperty("y") int row) {
+    this.x = col;
+    this.y = row;
   }
 
   /**
@@ -28,8 +32,8 @@ public class Coord {
       if (split.length != 2) {
         throw new IllegalArgumentException("Invalid coordinate format.");
       }
-      this.row = Integer.parseInt(split[0]);
-      this.col = Integer.parseInt(split[1]);
+      this.y = Integer.parseInt(split[0]);
+      this.x = Integer.parseInt(split[1]);
     } catch (NumberFormatException e) {
       throw new IllegalArgumentException("Invalid coordinate format.");
     }
@@ -40,8 +44,8 @@ public class Coord {
    *
    * @return the row of this coordinate
    */
-  public int getRow() {
-    return row;
+  public int getY() {
+    return y;
   }
 
   /**
@@ -49,8 +53,8 @@ public class Coord {
    *
    * @return the column of this coordinate
    */
-  public int getCol() {
-    return col;
+  public int getX() {
+    return x;
   }
 
   /**
@@ -60,13 +64,13 @@ public class Coord {
    * @return true if the given Coord is equal to this Coord, false otherwise
    */
   public boolean equals(Coord o) {
-    return o.row == this.row && o.col == this.col;
+    return o.y == this.y && o.x == this.x;
   }
 
   /**
    * Returns a string representation of this coordinate.
    */
   public String toString() {
-    return this.row + " " + this.col;
+    return this.y + " " + this.x;
   }
 }

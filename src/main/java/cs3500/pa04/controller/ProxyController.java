@@ -51,7 +51,6 @@ public class ProxyController {
    * Runs the proxy server and listens for and sends JSON messages.
    */
   public void run() {
-    // TODO: Error here when trying to run the server, prolly due to println being incorrect
     try {
       JsonParser parser = this.mapper.getFactory().createParser(this.in);
 
@@ -77,31 +76,36 @@ public class ProxyController {
         MessageJson joinResponse =
             new MessageJson("join",
                 JsonUtils.serializeRecord(new JoinMessage(this.player.name(), "SINGLE")));
-        this.out.println(joinResponse);
+        this.out.println(JsonUtils.serializeRecord(joinResponse));
         break;
       case "setup":
         MessageJson setupResponse =
             new MessageJson("setup", JsonUtils.serializeRecord(setup(arguments)));
-        this.out.println(setupResponse);
+        this.out.println(JsonUtils.serializeRecord(setupResponse));
         break;
       case "take-shots":
         MessageJson takeShotsResponse =
             new MessageJson("take-shots", JsonUtils.serializeRecord(takeShots()));
-        this.out.println(takeShotsResponse);
+        this.out.println(JsonUtils.serializeRecord(takeShotsResponse));
         break;
       case "report-damage":
         MessageJson reportDamageResponse =
             new MessageJson("report-damage",
                 JsonUtils.serializeRecord(reportDamage(arguments)));
+        this.out.println(JsonUtils.serializeRecord(reportDamageResponse));
         break;
       case "successful-hits":
         succesfulHits(arguments);
-        this.out.println(new MessageJson("successful-hits",
-            mapper.createObjectNode()));
+        JsonNode successfulHitsMessage =
+            JsonUtils.serializeRecord(new MessageJson("successful-hits",
+                mapper.createObjectNode()));
+        this.out.println(successfulHitsMessage);
         break;
       case "end-game":
         endGame(arguments);
-        this.out.println(new MessageJson("end-game", mapper.createObjectNode()));
+        JsonNode endGameMessage =
+            JsonUtils.serializeRecord(new MessageJson("end-game", mapper.createObjectNode()));
+        this.out.println(endGameMessage);
         break;
       default:
         throw new IllegalArgumentException("Invalid message name");
