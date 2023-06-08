@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cs3500.pa04.model.Coord;
 import cs3500.pa04.model.FleetJson;
+import cs3500.pa04.model.GameResult;
 import cs3500.pa04.model.JoinMessage;
 import cs3500.pa04.model.JsonUtils;
 import cs3500.pa04.model.MessageJson;
@@ -92,12 +93,49 @@ public class ProxyController {
                 JsonUtils.serializeRecord(reportDamage(arguments)));
         break;
       case "successful-hits":
+        succesfulHits(arguments);
+        // idk if null is correct here
+        this.out.println(new MessageJson("successful-hits",
+            null));
         break;
       case "end-game":
+        endGame(arguments);
+        // idk if null is correct here either
+        this.out.println(new MessageJson("end-game", null));
         break;
       default:
         throw new IllegalArgumentException("Invalid message name");
     }
+  }
+
+  /**
+   * Calls the endGame method for the player
+   *
+   * @param arguments the arguments for the end game request
+   */
+  private void endGame(JsonNode arguments) {
+    GameResult result = GameResult.fromString(arguments.get("result").asText());
+    String reason = arguments.get("reason").asText();
+
+    this.player.endGame(result, reason);
+  }
+
+  /**
+   * Reports to the player successful hits on their opponent's ships
+   *
+   * @param arguments the successful hits
+   */
+  private void succesfulHits(JsonNode arguments) {
+    CoordinatesMessage coords =
+        new ObjectMapper().convertValue(arguments, CoordinatesMessage.class);
+
+    // Array to ArrayList
+    ArrayList<Coord> successfulHits = new ArrayList<>();
+    for (Coord coord : coords.getCoordinates()) {
+      successfulHits.add(coord);
+    }
+
+    this.player.successfulHits(successfulHits);
   }
 
   /**
@@ -120,6 +158,8 @@ public class ProxyController {
   private CoordinatesMessage reportDamage(JsonNode arguments) {
     CoordinatesMessage coords =
         new ObjectMapper().convertValue(arguments, CoordinatesMessage.class);
+
+    // Array to ArrayList
     ArrayList<Coord> shotsOnPlayer = new ArrayList<>();
     for (Coord coord : coords.getCoordinates()) {
       shotsOnPlayer.add(coord);
@@ -141,6 +181,7 @@ public class ProxyController {
     int height = arguments.get("height").asInt();
     int width = arguments.get("width").asInt();
 
+    // Get numbers
     int numCarrier = arguments.get("fleet-spec").get("CARRIER").asInt();
     int numBattleship = arguments.get("fleet-spec").get("BATTLESHIP").asInt();
     int numDestroyer = arguments.get("fleet-spec").get("DESTROYER").asInt();
@@ -148,6 +189,7 @@ public class ProxyController {
 
     HashMap<ShipType, Integer> specs = new HashMap<>();
 
+    // Populate HashMap
     specs.put(ShipType.CARRIER, numCarrier);
     specs.put(ShipType.BATTLESHIP, numBattleship);
     specs.put(ShipType.DESTROYER, numDestroyer);

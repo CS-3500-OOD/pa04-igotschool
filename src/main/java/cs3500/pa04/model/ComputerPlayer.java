@@ -1,5 +1,6 @@
 package cs3500.pa04.model;
 
+import cs3500.pa04.controller.OutputParser;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,10 +15,13 @@ public class ComputerPlayer implements Player {
 
   private ArrayList<Coord> shotsMade = new ArrayList<>();
 
+  private Appendable out;
+
   /**
    * Constructs a computer player
    */
-  public ComputerPlayer() {
+  public ComputerPlayer(Appendable out) {
+    this.out = out;
   }
 
 
@@ -70,7 +74,7 @@ public class ComputerPlayer implements Player {
 
   @Override
   public void endGame(GameResult result, String reason) {
-    // Do anything?
+    OutputParser.show("Your AI " + result.toString() + " because " + reason, out);
   }
 
   /**
