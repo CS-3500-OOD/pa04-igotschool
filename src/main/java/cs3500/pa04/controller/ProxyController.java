@@ -96,14 +96,12 @@ public class ProxyController {
         break;
       case "successful-hits":
         succesfulHits(arguments);
-        // idk if null is correct here
         this.out.println(new MessageJson("successful-hits",
-            null));
+            mapper.createObjectNode()));
         break;
       case "end-game":
         endGame(arguments);
-        // idk if null is correct here either
-        this.out.println(new MessageJson("end-game", null));
+        this.out.println(new MessageJson("end-game", mapper.createObjectNode()));
         break;
       default:
         throw new IllegalArgumentException("Invalid message name");
