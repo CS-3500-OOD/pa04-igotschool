@@ -51,15 +51,16 @@ public class ProxyController {
    * Runs the proxy server and listens for and sends JSON messages.
    */
   public void run() {
+    // TODO: Error here when trying to run the server
     try {
       JsonParser parser = this.mapper.getFactory().createParser(this.in);
 
       while (!this.server.isClosed()) {
         MessageJson message = parser.readValueAs(MessageJson.class);
         delegateMessage(message);
+        System.out.println("Message received: " + message);
       }
     } catch (IOException e) {
-      System.out.println("Error");
       // Disconnected from server or parsing exception
     }
   }
