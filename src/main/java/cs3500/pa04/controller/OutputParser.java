@@ -5,6 +5,9 @@ import cs3500.pa04.model.ManualPlayer;
 import cs3500.pa04.view.BoardDisplayer;
 import cs3500.pa04.view.Printer;
 
+/**
+ * Parses and validates outputs for the view to display
+ */
 public class OutputParser {
 
   /**

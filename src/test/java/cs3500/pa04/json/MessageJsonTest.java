@@ -24,6 +24,7 @@ class MessageJsonTest {
 
   /**
    * Creates a JsonNode for testing
+   *
    * @return a JsonNode
    */
   private JsonNode createJsonNode() {

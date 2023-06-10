@@ -46,7 +46,7 @@ class ComputerPlayerTest {
    */
   @Test
   void testName() {
-    assertEquals("AI", player.name());
+    assertEquals("marbleville", player.name());
   }
 
   /**

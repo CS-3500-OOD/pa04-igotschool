@@ -1,3 +1,5 @@
+package cs3500.pa04.controller;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -17,7 +19,7 @@ public class Mocket extends Socket {
 
   /**
    * @param testLog what the server has received from the client
-   * @param toSend what the server will send to the client
+   * @param toSend  what the server will send to the client
    */
   public Mocket(ByteArrayOutputStream testLog, List<String> toSend) {
     this.testLog = testLog;

@@ -1,5 +1,8 @@
 package cs3500.pa04.model;
 
+/**
+ * Represents a battleship.
+ */
 public class Battleship extends Ship {
   /**
    * Constructor for Battleship.

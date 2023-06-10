@@ -1,5 +1,8 @@
 package cs3500.pa04.model;
 
+/**
+ * Represents a carrier.
+ */
 public class Carrier extends Ship {
   /**
    * Constructor for Carrier.

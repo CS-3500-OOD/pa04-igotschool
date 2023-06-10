@@ -3,6 +3,9 @@ package cs3500.pa04.view;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Gathers input from the console.
+ */
 public class InputGatherer {
 
   /**

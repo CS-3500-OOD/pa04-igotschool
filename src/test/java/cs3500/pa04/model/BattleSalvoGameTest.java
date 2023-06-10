@@ -30,7 +30,7 @@ class BattleSalvoGameTest {
    */
   @Test
   void testGetComputerPlayer() {
-    assertEquals("AI", game.getComputerPlayer().name());
+    assertEquals("marbleville", game.getComputerPlayer().name());
   }
 
 

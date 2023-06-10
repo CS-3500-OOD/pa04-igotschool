@@ -1,5 +1,8 @@
 package cs3500.pa04.model;
 
+/**
+ * Represents the types of ships
+ */
 public enum ShipType {
   CARRIER,
   BATTLESHIP,

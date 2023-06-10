@@ -1,5 +1,8 @@
 package cs3500.pa04.model;
 
+/**
+ * Represents a ship.
+ */
 public abstract class Ship {
 
   private Cell[] cells;
@@ -105,7 +108,8 @@ public abstract class Ship {
     Cell front = this.cells[0];
     // search for the lowest x or y value
     for (Cell cell : this.cells) {
-      if (cell.getCoord().getX() < front.getCoord().getX() || cell.getCoord().getY() < front
+      if (cell.getCoord().getX() < front.getCoord().getX()
+          || cell.getCoord().getY() < front
           .getCoord().getY()) {
         front = cell;
       }

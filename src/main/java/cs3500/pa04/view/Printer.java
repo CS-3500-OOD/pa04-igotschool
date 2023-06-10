@@ -1,5 +1,10 @@
 package cs3500.pa04.view;
 
+import java.io.IOException;
+
+/**
+ * Displays information to the user
+ */
 public class Printer {
   /**
    * Shows a massage to the user
@@ -10,7 +15,7 @@ public class Printer {
   public static void show(String message, Appendable out) {
     try {
       out.append(message);
-    } catch (Exception e) {
+    } catch (IOException e) {
       throw new IllegalArgumentException("Invalid output stream");
     }
   }

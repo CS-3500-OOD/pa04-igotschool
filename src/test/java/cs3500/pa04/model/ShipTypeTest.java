@@ -1,6 +1,7 @@
 package cs3500.pa04.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +15,7 @@ class ShipTypeTest {
     assertEquals(ShipType.BATTLESHIP.getShip().getName(), "Battleship");
     assertEquals(ShipType.DESTROYER.getShip().getName(), "Destroyer");
     assertEquals(ShipType.SUBMARINE.getShip().getName(), "Submarine");
+    assertThrows(IllegalArgumentException.class, () -> ShipType.UNKNOWN.getShip());
   }
 
   /**
@@ -25,5 +27,6 @@ class ShipTypeTest {
     assertEquals(ShipType.getTypeFromNumber(1), ShipType.BATTLESHIP);
     assertEquals(ShipType.getTypeFromNumber(2), ShipType.DESTROYER);
     assertEquals(ShipType.getTypeFromNumber(3), ShipType.SUBMARINE);
+    assertThrows(IllegalArgumentException.class, () -> ShipType.getTypeFromNumber(4));
   }
 }

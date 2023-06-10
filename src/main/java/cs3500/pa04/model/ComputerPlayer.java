@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * Represents a player that can play the game automatically.
+ */
 public class ComputerPlayer implements Player {
   private Board board;
 

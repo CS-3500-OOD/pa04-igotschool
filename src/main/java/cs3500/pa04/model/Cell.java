@@ -1,5 +1,8 @@
 package cs3500.pa04.model;
 
+/**
+ * Represents a cell of a battleship board.
+ */
 public class Cell {
   private Ship ship;
 

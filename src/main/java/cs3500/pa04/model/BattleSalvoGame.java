@@ -38,6 +38,11 @@ public class BattleSalvoGame {
     this.computerPlayer.setup(dimensions.get(0), dimensions.get(1), specifications);
   }
 
+  /**
+   * Plays the game until a player wins or loses.
+   *
+   * @param out the output of this game
+   */
   public void playGame(Appendable out) {
     while (this.result == GameResult.IN_PROGRESS) {
       OutputParser.showBoards(manualPlayer, out);

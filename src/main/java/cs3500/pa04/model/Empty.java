@@ -1,5 +1,8 @@
 package cs3500.pa04.model;
 
+/**
+ * Represents an empty ship.
+ */
 public class Empty extends Ship {
   /**
    * Constructor for Empty.

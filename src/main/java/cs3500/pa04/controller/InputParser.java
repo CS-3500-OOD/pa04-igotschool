@@ -8,6 +8,9 @@ import cs3500.pa04.view.Printer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Parses and validates inputs gathered from the view.
+ */
 public class InputParser {
   /**
    * Pareses and validates inputs gathered from the view into a list of coordinates.

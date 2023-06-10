@@ -3,18 +3,17 @@ package cs3500.pa04.controller;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import cs3500.pa04.model.ComputerPlayer;
-import cs3500.pa04.model.Coord;
+import cs3500.pa04.json.CoordinatesMessage;
 import cs3500.pa04.json.FleetJson;
-import cs3500.pa04.model.GameResult;
 import cs3500.pa04.json.JoinMessage;
 import cs3500.pa04.json.JsonUtils;
 import cs3500.pa04.json.MessageJson;
+import cs3500.pa04.model.Coord;
+import cs3500.pa04.model.GameResult;
 import cs3500.pa04.model.Player;
 import cs3500.pa04.model.Ship;
 import cs3500.pa04.model.ShipAdapter;
 import cs3500.pa04.model.ShipType;
-import cs3500.pa04.json.CoordinatesMessage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -27,7 +26,7 @@ import java.util.List;
  * Proxy class for a server that hosts a game of Battleship.
  */
 public class ProxyController {
-  ComputerPlayer player;
+  Player player;
 
   Socket server;
 
@@ -41,7 +40,7 @@ public class ProxyController {
    *
    * @param player the player connecting to this proxy server
    */
-  public ProxyController(ComputerPlayer player, Socket server) throws IOException {
+  public ProxyController(Player player, Socket server) throws IOException {
     this.player = player;
     this.server = server;
     this.in = server.getInputStream();

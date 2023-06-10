@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Represents a player that can play the game manually.
+ */
 public class ManualPlayer implements Player {
   private String name;
 
@@ -66,9 +69,9 @@ public class ManualPlayer implements Player {
     ArrayList<Coord> shots = InputParser.getListOfShots(this,
         this.in, this.out);
     for (Coord c : shots) {
-      if (c.getY() >= this.opponentBoard.getNumRows() ||
-          c.getX() >= this.opponentBoard.getNumCols() ||
-          c.getY() < 0 || c.getX() < 0) {
+      if (c.getY() >= this.opponentBoard.getNumRows()
+          || c.getX() >= this.opponentBoard.getNumCols()
+          || c.getY() < 0 || c.getX() < 0) {
         OutputParser.show("Invalid coordinate: " + c, out);
         return takeShots();
       }
