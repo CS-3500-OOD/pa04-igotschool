@@ -81,7 +81,6 @@ public class ProxyController {
       case "setup":
         MessageJson setupResponse =
             new MessageJson("setup", JsonUtils.serializeRecord(setup(arguments)));
-        System.out.println(this.player.getBoard().toString());
         this.out.println(JsonUtils.serializeRecord(setupResponse));
         break;
       case "take-shots":
