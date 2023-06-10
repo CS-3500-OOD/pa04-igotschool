@@ -330,4 +330,21 @@ public class Board {
     }
     return boardString.toString();
   }
+
+  /**
+   * Returns a list of all cells of this board that have not been fired at
+   *
+   * @return a list of all cells of this board that have not been fired at
+   */
+  public ArrayList<Cell> getUnfiredCells() {
+    ArrayList<Cell> unfired = new ArrayList<>();
+    for (Cell[] row : board) {
+      for (Cell cell : row) {
+        if (!cell.isFiredUpon()) {
+          unfired.add(cell);
+        }
+      }
+    }
+    return unfired;
+  }
 }

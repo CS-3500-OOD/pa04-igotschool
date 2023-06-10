@@ -89,7 +89,6 @@ public class ProxyController {
         this.out.println(JsonUtils.serializeRecord(takeShotsResponse));
         break;
       case "report-damage":
-        System.out.println(player.getBoard().toString());
         MessageJson reportDamageResponse =
             new MessageJson("report-damage",
                 JsonUtils.serializeRecord(reportDamage(arguments)));

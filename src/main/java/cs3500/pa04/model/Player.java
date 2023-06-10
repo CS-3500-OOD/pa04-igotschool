@@ -64,4 +64,12 @@ public interface Player {
    */
   void endGame(GameResult result, String reason);
 
+
+  /**
+   * Returns the player's board.
+   *
+   * @return the player's board
+   */
+  Board getBoard();
+
 }

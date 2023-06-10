@@ -10,15 +10,23 @@ import java.util.List;
  */
 public class ShipAdapter {
   public static ShipJson adapt(Ship ship) {
-    // TODO: Broken bc Cells[0] is NOT always the top of the ship.
-    return new ShipJson(ship.getCells()[0].getCoord(), ship.getLength(), ship.getDirection());
+    String direction = ship.getDirection();
+
+    Coord firstCoord = ship.getCells()[0].getCoord();
+    Coord lastCoord = ship.getCells()[0].getCoord();
+
+    // Find the front of the ship
+    Coord frontCoord =
+        firstCoord.getX() < lastCoord.getX() || firstCoord.getY() < lastCoord.getY() ? firstCoord :
+            lastCoord;
+
+    return new ShipJson(frontCoord, ship.getLength(), direction);
   }
 
   public static FleetJson adaptList(List<Ship> fleet) {
     ShipJson[] ships = new ShipJson[fleet.size()];
     for (int i = 0; i < fleet.size(); i++) {
-      ships[i] = new ShipJson(fleet.get(i).getCells()[0].getCoord(), fleet.get(i).getLength(),
-          fleet.get(i).getDirection());
+      ships[i] = adapt(fleet.get(i));
     }
     return new FleetJson(ships);
   }
