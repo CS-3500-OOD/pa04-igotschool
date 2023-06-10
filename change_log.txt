@@ -2,3 +2,4 @@
 - updated main to support command line args for host and port
 - added getBoard() to player interface
 - added getUnfiredCells() to board class
+- added getFront() to Ship class

@@ -12,13 +12,8 @@ public class ShipAdapter {
   public static ShipJson adapt(Ship ship) {
     String direction = ship.getDirection();
 
-    Coord firstCoord = ship.getCells()[0].getCoord();
-    Coord lastCoord = ship.getCells()[0].getCoord();
-
     // Find the front of the ship
-    Coord frontCoord =
-        firstCoord.getX() < lastCoord.getX() || firstCoord.getY() < lastCoord.getY() ? firstCoord :
-            lastCoord;
+    Coord frontCoord = ship.getFront().getCoord();
 
     return new ShipJson(frontCoord, ship.getLength(), direction);
   }

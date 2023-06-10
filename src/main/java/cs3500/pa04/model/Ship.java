@@ -95,6 +95,23 @@ public abstract class Ship {
     }
     return true;
   }
+
+  /**
+   * Returns the front of this ship
+   *
+   * @return the head of this ship
+   */
+  public Cell getFront() {
+    Cell front = this.cells[0];
+    // search for the lowest x or y value
+    for (Cell cell : this.cells) {
+      if (cell.getCoord().getX() < front.getCoord().getX() || cell.getCoord().getY() < front
+          .getCoord().getY()) {
+        front = cell;
+      }
+    }
+    return front;
+  }
 }
 
 

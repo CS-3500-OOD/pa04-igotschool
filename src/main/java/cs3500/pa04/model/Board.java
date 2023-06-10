@@ -177,12 +177,14 @@ public class Board {
   private void placeShip(Ship ship) {
     // Gets cells that are empty
     ArrayList<Cell> unpopulated = getUnpopulated();
+
     // While loop control
     boolean shipPlaced = false;
     while (!shipPlaced) {
       if (unpopulated.size() == 0) {
         throw new IllegalArgumentException("No more unpopulated cells");
       }
+
       // Random orientation
       boolean vertical = rand.nextBoolean();
       // Get random cell and generate possible ship locations from it
@@ -199,8 +201,6 @@ public class Board {
         unpopulated.remove(c);
       }
 
-      // If horizontal or vertical are long enough, randomly place the ship within, else, try again
-      int shipCellIdx = 0;
       // throw some randomness in there
       if (consecutiveVertical.size() >= ship.getLength() && vertical) {
         placeShipInArray(consecutiveVertical, ship);
@@ -324,7 +324,7 @@ public class Board {
     StringBuilder boardString = new StringBuilder();
     for (Cell[] row : board) {
       for (Cell cell : row) {
-        boardString.append(cell.toString());
+        boardString.append(cell.toString() + " ");
       }
       boardString.append("\n");
     }

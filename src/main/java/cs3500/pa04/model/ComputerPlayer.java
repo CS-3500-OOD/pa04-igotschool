@@ -49,13 +49,19 @@ public class ComputerPlayer implements Player {
   @Override
   public List<Coord> takeShots() {
     ArrayList<Coord> shots = new ArrayList<>();
-    ArrayList<Cell> possibleShots = this.board.getUnfiredCells();
+    ArrayList<Cell> possibleShots = this.opponentBoard.getUnfiredCells();
 
     int numShots = Math.min(this.board.getShips().size(), possibleShots.size());
 
     for (int i = 0; i < numShots; i++) {
-      shots.add(possibleShots.get(rand.nextInt(possibleShots.size())).getCoord());
+      shots.add(possibleShots.remove(rand.nextInt(possibleShots.size())).getCoord());
     }
+
+    // Update opponent board data
+    for (Coord shot : shots) {
+      this.opponentBoard.getCell(shot).firedUpon();
+    }
+
     return shots;
   }
 

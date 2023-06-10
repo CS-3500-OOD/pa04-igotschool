@@ -81,6 +81,7 @@ public class ProxyController {
       case "setup":
         MessageJson setupResponse =
             new MessageJson("setup", JsonUtils.serializeRecord(setup(arguments)));
+        System.out.println(this.player.getBoard().toString());
         this.out.println(JsonUtils.serializeRecord(setupResponse));
         break;
       case "take-shots":
@@ -170,7 +171,6 @@ public class ProxyController {
     }
 
     List<Coord> damage = this.player.reportDamage(shotsOnPlayer);
-    System.out.println("NUMBER OF HITS: " + damage.size());
     Coord[] damageArray = damage.toArray(new Coord[0]);
 
     return new CoordinatesMessage(damageArray);
