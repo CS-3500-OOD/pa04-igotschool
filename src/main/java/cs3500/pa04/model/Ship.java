@@ -1,0 +1,121 @@
+package cs3500.pa04.model;
+
+/**
+ * Represents a ship.
+ */
+public abstract class Ship {
+
+  private Cell[] cells;
+
+  private final String name;
+
+  private final String symbol;
+
+  /**
+   * Constructs a ship with the given cells.
+   *
+   * @param cells the cells that this ship occupies
+   */
+  public Ship(Cell[] cells, String name, String symbol) {
+    this.cells = cells;
+    this.name = name;
+    this.symbol = symbol;
+  }
+
+  /**
+   * Gets the length of this ship.
+   *
+   * @return the length of this ship
+   */
+  public int getLength() {
+    return this.cells.length;
+  }
+
+  /**
+   * Gets the cells that this ship occupies.
+   *
+   * @return the cells that this ship occupies
+   */
+  public Cell[] getCells() {
+    return this.cells;
+  }
+
+  /**
+   * Gets the name of this ship.
+   *
+   * @return the name of this ship
+   */
+  public String getName() {
+    return this.name;
+  }
+
+  /**
+   * Gets the symbol representing this ship.
+   *
+   * @return the symbol representing this ship
+   */
+  public String getSymbol() {
+    return this.symbol;
+  }
+
+  /**
+   * Sets the cell at the given index to the given cell.
+   *
+   * @param index the index of the cell to set
+   * @param cell  the cell to set
+   */
+  public void setCell(int index, Cell cell) {
+    this.cells[index] = cell;
+  }
+
+  /**
+   * Returns a string representation of this ship.
+   *
+   * @return a string representation of this ship
+   */
+  public String toString() {
+    return this.symbol;
+  }
+
+  /**
+   * Returns the direction of this ship.
+   */
+  public String getDirection() {
+    return this.cells[0].getCoord().getX() == this.cells[1].getCoord().getX() ? "VERTICAL"
+        : "HORIZONTAL";
+  }
+
+  /**
+   * Returns weather or not this ship is sunk
+   *
+   * @return true if this ship is sunk
+   */
+  public boolean isSunk() {
+    for (Cell cell : this.cells) {
+      if (!cell.isHit()) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
+   * Returns the front of this ship
+   *
+   * @return the head of this ship
+   */
+  public Cell getFront() {
+    Cell front = this.cells[0];
+    // search for the lowest x or y value
+    for (Cell cell : this.cells) {
+      if (cell.getCoord().getX() < front.getCoord().getX()
+          || cell.getCoord().getY() < front
+          .getCoord().getY()) {
+        front = cell;
+      }
+    }
+    return front;
+  }
+}
+
+
