@@ -1,0 +1,5 @@
+- added code to output win/loss condition to inform user if their AI won or lost
+- updated main to support command line args for host and port
+- added getBoard() to player interface
+- added getUnfiredCells() to board class
+- added getFront() to Ship class
